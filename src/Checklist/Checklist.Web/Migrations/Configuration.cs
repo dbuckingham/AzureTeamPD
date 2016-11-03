@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Checklist.Web.Context;
-using Checklist.Web.Data;
 using Checklist.Web.Migrations.Factories;
-using Checklist = Checklist.Web.Data.Checklist;
 
 namespace Checklist.Web.Migrations
 {
@@ -32,6 +29,7 @@ namespace Checklist.Web.Migrations
             //    );
             //
 
+#if DEBUG
             if (!context.Set<Data.Checklist>().Any())
             {
                 context.Set<Data.Checklist>().AddOrUpdate(cl => cl.Name, ChecklistFactory.All);
@@ -44,6 +42,7 @@ namespace Checklist.Web.Migrations
 
                 ChecklistItemFactory.All = context.Set<Data.ChecklistItem>().ToArray();
             }
+#endif
         }
     }
 }
