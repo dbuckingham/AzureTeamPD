@@ -1,12 +1,19 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Checklist.Web.Context;
 
 namespace Checklist.Web.Controllers
 {
     public class HomeController : Controller
     {
+        // Yes, yes, I need to add StructureMap
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+            var checklist = _context.Set<Data.Checklist>().SingleOrDefault();
+
+            return View(checklist);
         }
 
         public ActionResult About()
